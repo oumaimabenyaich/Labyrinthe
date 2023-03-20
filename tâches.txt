@@ -1,0 +1,4 @@
+1. Créer un client 
+2. Capable de se connecter à un serveur
+3. Confirmation du serveur
+4. Capable de recevoir et de répondre à un message (ping pong)
