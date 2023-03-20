@@ -1,0 +1,2 @@
+ce que le jeu doit contenir : 
+une IA qui puisse se connecter à un port 
