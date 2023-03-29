@@ -1,7 +1,7 @@
 import socket
 import time
 import json
-
+#juste pour commit
 def moveAEnvoyer(tile, gate, new_positions):
     print("generation du move")
     retour = {"tile": "tile" ,"gate": "A","new_position": 0}
