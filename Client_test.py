@@ -46,13 +46,14 @@ while True:
             #time.sleep(1)
             #clientServeur,adresseServeur = t.accept() #clientServeur est un socket
             #messageServeur = clientServeur.recv(2048).decode()
-            if jsonrepS["lives"] == 0:
-                clientServeur.send("""{"response": "giveup",}""".encode())
-                break
-            elif jsonrepS["request"] == "play":
-                jeuDuCoup(clientServeur, jsonrepS["state"])
-            else: 
-                break
+            if 'lives' in jsonrepS: 
+                if jsonrepS["lives"] == 0:
+                    clientServeur.send("""{"response": "giveup",}""".encode())
+                    break
+                elif jsonrepS["request"] == "play":
+                    jeuDuCoup(clientServeur, jsonrepS["state"])
+                else: 
+                    break
     
 print("fin")
 
