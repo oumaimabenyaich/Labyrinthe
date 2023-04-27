@@ -1,7 +1,7 @@
 import socket
-import time
 import json
 #juste pour commit
+
 def moveAEnvoyer(tile, gate, new_positions):
     print("generation du move")
     retour = {"tile": "tile" ,"gate": "A","new_position": 0}
@@ -11,121 +11,71 @@ def moveAEnvoyer(tile, gate, new_positions):
     print(retour)
     return retour
 
-def afficherEtat(jsonSS):
-    print("les joueurs sont : ", jsonSS["players"])
-    print("vous etes le joueur : ", jsonSS["current"] + 1)
-    print("votre positions est : " , jsonSS["positions"])
-    print("voici le tresor que vous devez attrapper : " , jsonSS["target"])
-    print("voici le nombre de tresors manquants" , jsonSS["remaining"])
-    print("voici la piece manquante : ")
-    if jsonSS["tile"]["N"]:
-        print("--        --")
-        print("|          |")
-    else:
-        print("------------")
-        print("|          |")
-    if jsonSS["tile"]["E"] and jsonSS["tile"]["W"]:
-        print("            ")
-        print("            ")
-        print("            ")
-        print("            ")
-        print("            ")
-        print("            ")
-    elif jsonSS["tile"]["E"] == False and jsonSS["tile"]["W"]:
-        print("           |")
-        print("           |")
-        print("           |")
-        print("           |")
-        print("           |")
-        print("           |")
-    elif jsonSS["tile"]["W"] == False and jsonSS["tile"]["E"]:
-        print("|           ")
-        print("|           ")
-        print("|           ")
-        print("|           ")
-        print("|           ")
-        print("|           ")
-    else: 
-        print("|          |")
-        print("|          |")
-        print("|          |")
-        print("|          |")
-        print("|          |")
-        print("|          |")
-    if jsonSS["tile"]["S"]:
-        print("|          |")
-        print("--        --")
-    else:
-        print("|          |")
-        print("------------")
-
-
-def jeuDuCoup(client = socket.socket(), state = """{"a":"b"}"""):
-    print(type(client))
+ #le i sert comme indice pour tester notre code, a partir du 50eme coup, le code va commencer a generer des erreur
+ #le state est l'etat du jeu qui sera un dictionnaire
+ #la fonction retournera un tuple qui va ensuite etre utiliser par la fonction moveAEnvoyer
+def jeuDuCoup(i = 0, state = {"a":"b"}):
     print(type(state))
-    jsonS= json.loads(state)
     ################ ici il y aura le code de "l'ia"
-    afficherEtat(jsonS)
-    print("votre piece ne sera pas orientable pace que vazy gros assahbe")
-    porte = input("entree la porte ou vous voulez jouez(une lettre de A à L et en majuscule svp) : ")
-    posFinal = int(input("entree la position ou vous voulez atterir avec votre pion : "))
+    #afficherEtat(jsonS)
+    #print("votre piece ne sera pas orientable pace que vazy gros assahbe")
+    #porte = input("entree la porte ou vous voulez jouez(une lettre de A à L et en majuscule svp) : ")
+    #posFinal = int(input("entree la position ou vous voulez atterir avec votre pion : "))
+    porte = "A"
+    posFinal = state["positions"][state["current"]]
+    tile = state["tile"]
+    if i > 50 : 
+        posFinal = posFinal + 1
+    
     #################### apres sa il s'agit que de l'envoie de la reponse oslm
-    reponse = """{"response": "move","move": the_move_played,"message": "coup jouer"}"""
-    jsonMove = json.loads(reponse)
-    jsonMove["move"] = moveAEnvoyer(jsonS["tile"], porte, posFinal)
-    reponse = json.dumps(jsonMove)
-    client.send(reponse.encode())
+    return tile , porte , posFinal
 
 
+# on est le client IA
+s = socket.socket()
+address = ('localhost', 3000)  # port du prof
+s.connect(address)
+request = {
+    "request": "subscribe",
+    "port": 5000,     # numero de port choisi par nous
+    "name": "Notre Jeu",
+    "matricules": ["19516", "19519"]
+}
+# message qu'on envoie au serveur qui contient les données d'inscription
+message = json.dumps(request).encode()
+s.send(message)
+reponse = s.recv(2048).decode()  # on ecoute la reponse du serveur
+print("reponse:", reponse)
+s.close()
+
+# les roles s'inversent, on devient le serveur jeu
 
 s = socket.socket()
-adresse = ("localhost",3000) #METTRE L'IP et le canal
-s.connect(adresse)
-requete = """{"request" : "subscribe", "port" : 5000, "name" : "Test humanoid", "matricules" : ["20144", "21203"]}""".encode()
-s.send(requete)
-t = socket.socket()
-adresse1 = ("0.0.0.0", 5000)
-t.bind(adresse1)
+s.bind(('0.0.0.0', 5000))
+s.listen()
 
-donnee = """ { "response" : "lol" } """
-donneeStockage = """ { "response" : "lol" } """
+
+
+o = -1
 while True:
-    if donneeStockage == """ { "response" : "lol" } """:
-        donnee = s.recv(2048).decode()
-        jsonrep = json.loads(donnee)
-        if jsonrep["response"] == "error" : # en cas d'erreur
-            print("error")
-            break
-        else: 
-            print("ok")
-            donneeStockage = donnee
-    else:
-        t.listen()
-        jsonrep = json.loads(donnee)
-        if jsonrep["response"] == "ok":
-            time.sleep(1)
-            clientServeur,adresseServeur = t.accept() #clientServeur est un socket
-            messageServeur = clientServeur.recv(2048).decode()
-        jsonrepS = json.loads(messageServeur)
-        if jsonrepS["request"] == "ping" and jsonrep["response"] != "go":
-            clientServeur.send("""{"response" : "pong"}""".encode())
-            donnee = """ { "response" : "go" } """
+    client, address = s.accept()
+    with client:
+        message = json.loads(client.recv(10000).decode())
+        print(message)
+
+        if message == {'request': 'ping'}:
+            client.send(json.dumps({'response': 'pong'}).encode())
+            print("pong")
+# dictionnaire qu on transforme en json avec dumps puis qu on transforme en binaire avec encode pour pouvoire l'envoyer au client
+
         else:
-            print("go jouer")
-            #time.sleep(1)
-            #clientServeur,adresseServeur = t.accept() #clientServeur est un socket
-            #messageServeur = clientServeur.recv(2048).decode()
-            if jsonrepS["lives"] == 0:
-                clientServeur.send("""{"response": "giveup",}""".encode())
-                break
-            elif jsonrepS["request"] == "play":
-                jeuDuCoup(clientServeur, jsonrepS["state"])
-            else: 
-                break
-    
-print("fin")
+            # liste pour recuper la clé state du dictionnaire
 
-    
-
-s.close()
-t.close()
+            print("cest sensé jouer")
+            tile, gate, new_positions = jeuDuCoup(o, message["state"])
+            o = o +1
+            client.send(json.dumps({
+                "response": "move",
+                "move": moveAEnvoyer(tile, gate, new_positions),
+                "message": "let's play"
+            }).encode())
