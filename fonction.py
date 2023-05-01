@@ -56,18 +56,21 @@ def afficherEtat(jsonSS):
         print("------------")
 
 
-def jeuDuCoup(client = socket.socket(), state = """{"a":"b"}"""):
-    print(type(client))
+ #le i sert comme indice pour tester notre code, a partir du 50eme coup, le code va commencer a generer des erreur
+ #le state est l'etat du jeu qui sera un dictionnaire
+ #la fonction retournera un tuple qui va ensuite etre utiliser par la fonction moveAEnvoyer
+def jeuDuCoupTest(i = 0, state = {"a":"b"}):
     print(type(state))
-    jsonS= json.loads(state)
     ################ ici il y aura le code de "l'ia"
-    afficherEtat(jsonS)
-    print("votre piece ne sera pas orientable pace que vazy gros assahbe")
-    porte = input("entree la porte ou vous voulez jouez(une lettre de A à L et en majuscule svp) : ")
-    posFinal = int(input("entree la position ou vous voulez atterir avec votre pion : "))
+    #afficherEtat(jsonS)
+    #print("votre piece ne sera pas orientable pace que vazy gros assahbe")
+    #porte = input("entree la porte ou vous voulez jouez(une lettre de A à L et en majuscule svp) : ")
+    #posFinal = int(input("entree la position ou vous voulez atterir avec votre pion : "))
+    porte = "A"
+    posFinal = state["positions"][state["current"]]
+    tile = state["tile"]
+    if i > 50 : 
+        posFinal = posFinal + 1
+    
     #################### apres sa il s'agit que de l'envoie de la reponse oslm
-    reponse = """{"response": "move","move": the_move_played,"message": "coup jouer"}"""
-    jsonMove = json.loads(reponse)
-    jsonMove["move"] = moveAEnvoyer(jsonS["tile"], porte, posFinal)
-    reponse = json.dumps(jsonMove)
-    client.send(reponse.encode())
+    return tile , porte , posFinal

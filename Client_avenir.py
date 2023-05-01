@@ -1,34 +1,9 @@
 import socket
 import json
-#juste pour commit
+from fonction import moveAEnvoyer
+from fonction import jeuDuCoupTest
 
-def moveAEnvoyer(tile, gate, new_positions):
-    print("generation du move")
-    retour = {"tile": "tile" ,"gate": "A","new_position": 0}
-    retour["tile"] = tile
-    retour["gate"] = gate
-    retour["new_position"] = new_positions
-    print(retour)
-    return retour
 
- #le i sert comme indice pour tester notre code, a partir du 50eme coup, le code va commencer a generer des erreur
- #le state est l'etat du jeu qui sera un dictionnaire
- #la fonction retournera un tuple qui va ensuite etre utiliser par la fonction moveAEnvoyer
-def jeuDuCoup(i = 0, state = {"a":"b"}):
-    print(type(state))
-    ################ ici il y aura le code de "l'ia"
-    #afficherEtat(jsonS)
-    #print("votre piece ne sera pas orientable pace que vazy gros assahbe")
-    #porte = input("entree la porte ou vous voulez jouez(une lettre de A à L et en majuscule svp) : ")
-    #posFinal = int(input("entree la position ou vous voulez atterir avec votre pion : "))
-    porte = "A"
-    posFinal = state["positions"][state["current"]]
-    tile = state["tile"]
-    if i > 50 : 
-        posFinal = posFinal + 1
-    
-    #################### apres sa il s'agit que de l'envoie de la reponse oslm
-    return tile , porte , posFinal
 
 
 # on est le client IA
@@ -72,7 +47,7 @@ while True:
             # liste pour recuper la clé state du dictionnaire
 
             print("cest sensé jouer")
-            tile, gate, new_positions = jeuDuCoup(o, message["state"])
+            tile, gate, new_positions = jeuDuCoupTest(o, message["state"])
             o = o +1
             client.send(json.dumps({
                 "response": "move",
