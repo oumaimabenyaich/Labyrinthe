@@ -47,7 +47,7 @@ while True:
             # liste pour recuper la clé state du dictionnaire
 
             print("cest sensé jouer")
-            tile, gate, new_positions = jeuDuCoupTest(o, message["state"])
+            tile, gate, new_positions = jeuDuCoup(o, message["state"])
             o = o +1
             client.send(json.dumps({
                 "response": "move",
