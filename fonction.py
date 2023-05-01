@@ -74,3 +74,19 @@ def jeuDuCoupTest(i = 0, state = {"a":"b"}):
     
     #################### apres sa il s'agit que de l'envoie de la reponse oslm
     return tile , porte , posFinal
+
+def jeuDuCoup(i = 0, state = {"a":"b"}):
+    print(type(state))
+    ################ ici il y aura le code de "l'ia"
+    #afficherEtat(jsonS)
+    #print("votre piece ne sera pas orientable pace que vazy gros assahbe")
+    #porte = input("entree la porte ou vous voulez jouez(une lettre de A à L et en majuscule svp) : ")
+    #posFinal = int(input("entree la position ou vous voulez atterir avec votre pion : "))
+    porte = "A"
+    posFinal = state["positions"][state["current"]]
+    tile = state["tile"]
+    if i > 50 : 
+        posFinal = posFinal + 1
+    
+    #################### apres sa il s'agit que de l'envoie de la reponse oslm
+    return tile , porte , posFinal
