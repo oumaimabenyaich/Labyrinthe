@@ -10,9 +10,9 @@ def jeuDuCoup(client = socket.socket(), state = """{"a":"b"}"""):
 
 
 s = socket.socket()
-adresse = ("localhost",3000) #METTRE L'IP et le canal
+adresse = ("127.0.0.1",3000) #METTRE L'IP et le canal
 s.connect(adresse)
-requete = """{"request" : "subscribe", "port" : 5000, "name" : "Test binome", "matricules" : ["20140", "21200"]}""".encode()
+requete = """{"request" : "subscribe", "port" : 5000, "name" : "AzizxAisha", "matricules" : ["22375", "21237"]}""".encode()
 s.send(requete)
 t = socket.socket()
 adresse1 = ("0.0.0.0", 5000)
