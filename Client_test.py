@@ -1,62 +1,66 @@
 import socket
-import time
 import json
+from fonction import moveAEnvoyer
+from fonction import jeuDuCoupTest
 
 
 
-def jeuDuCoup(client = socket.socket(), state = """{"a":"b"}"""):
-    print("sa joue")
+# on est le client IA
+s = socket.socket()
+address = ('localhost', 3000)  # port du prof
+s.connect(address)
+request = {
+    "request": "subscribe",
+    "port": 8889,     # numero de port choisi par nous
+    "name": "Notre Test",
+    "matricules": ["19000", "19500"]
+}
+# message qu'on envoie au serveur qui contient les données d'inscription
+message = json.dumps(request).encode()
+s.send(message)
+reponse = s.recv(10000).decode()  # on ecoute la reponse du serveur
+print("reponse:", reponse)
+s.close()
 
-
+# les roles s'inversent, on devient le serveur jeu
 
 s = socket.socket()
-adresse = ("127.0.0.1",3000) #METTRE L'IP et le canal
+adresse = ("localhost",3000) #METTRE L'IP et le canal
 s.connect(adresse)
-requete = """{"request" : "subscribe", "port" : 5000, "name" : "AzizxAisha", "matricules" : ["22375", "21237"]}""".encode()
+requete = """{"request" : "subscribe", "port" : 5000, "name" : "Test binome", "matricules" : ["20140", "21200"]}""".encode()
 s.send(requete)
 t = socket.socket()
 adresse1 = ("0.0.0.0", 5000)
 t.bind(adresse1)
 
-donnee = """ { "response" : "lol" } """
-donneeStockage = """ { "response" : "lol" } """
+o = -1
 while True:
-    if donneeStockage == """ { "response" : "lol" } """:
-        donnee = s.recv(2048).decode()
-        jsonrep = json.loads(donnee)
-        if jsonrep["response"] == "error" : # en cas d'erreur
-            print("error")
-            break
-        else: 
-            print("ok")
-            donneeStockage = donnee
-    else:
-        t.listen()
-        jsonrep = json.loads(donnee)
-        if jsonrep["response"] == "ok":
-            time.sleep(1)
-            clientServeur,adresseServeur = t.accept() #clientServeur est un socket
-            messageServeur = clientServeur.recv(2048).decode()
-        jsonrepS = json.loads(messageServeur)
-        if jsonrepS["request"] == "ping" and jsonrep["response"] != "go":
-            clientServeur.send("""{"response" : "pong"}""".encode())
-            donnee = """ { "response" : "go" } """
+    client, address = s.accept()
+    with client:
+        messagebis = client.recv(10000).decode()
+        print("########################")
+        print("avant jsonLoad")
+        print(messagebis)
+        print(type(messagebis))
+        message = json.loads(messagebis)
+        print("apres jsonLoad")
+        print(message)
+        print(type(message))
+        print("########################")
+
+        if message == {'request': 'ping'}:
+            client.send(json.dumps({'response': 'pong'}).encode())
+            print("pong")
+# dictionnaire qu on transforme en json avec dumps puis qu on transforme en binaire avec encode pour pouvoire l'envoyer au client
+
         else:
-            print("go jouer")
-            #time.sleep(1)
-            #clientServeur,adresseServeur = t.accept() #clientServeur est un socket
-            #messageServeur = clientServeur.recv(2048).decode()
-            if jsonrepS["lives"] == 0:
-                clientServeur.send("""{"response": "giveup",}""".encode())
-                break
-            elif jsonrepS["request"] == "play":
-                jeuDuCoup(clientServeur, jsonrepS["state"])
-            else: 
-                break
-    
-print("fin")
+            # liste pour recuper la clé state du dictionnaire
 
-    
-
-s.close()
-t.close()
+            print("cest sensé jouer")
+            tile, gate, new_positions = jeuDuCoupTest(o, message["state"])
+            o = o +1
+            client.send(json.dumps({
+                "response": "move",
+                "move": moveAEnvoyer(tile, gate, new_positions),
+                "message": "let's play"
+            }).encode())
