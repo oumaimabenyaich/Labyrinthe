@@ -25,13 +25,8 @@ s.close()
 # les roles s'inversent, on devient le serveur jeu
 
 s = socket.socket()
-adresse = ("localhost",3000) #METTRE L'IP et le canal
-s.connect(adresse)
-requete = """{"request" : "subscribe", "port" : 5000, "name" : "Test binome", "matricules" : ["20140", "21200"]}""".encode()
-s.send(requete)
-t = socket.socket()
-adresse1 = ("0.0.0.0", 5000)
-t.bind(adresse1)
+s.bind(('0.0.0.0', 8889))
+s.listen()
 
 o = -1
 while True:
