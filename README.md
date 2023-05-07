@@ -8,11 +8,14 @@
 
 ## $\color{red}> \space Règles \space du \space jeu \space < $
 
-- Chaque tour est composé de deux actions : insérer la tuile supplémentaire **ET** déplacer le pion
+- Chaque tour est composé de deux actions : 
+  - insérer la tuile supplémentaire
+  - déplacer le pion
 - La tuile ne peut être insérer que là où il y a des flèches
 - La nouvelle tuile est passée au joueur suivant
 - Le pion doit se déplacer vers le trésor par le chemin le plus rapide
 - Il faut respecter les chemins 
 - Le joueur peut s'arrêter sur n'importe quelle case, il peut traverser une case où un pion est déjà présent et même s'arrêter dessus
 - Si un joueur sort du plateau, il réapparait de l'autre côté du plateau sur la même ligne
-
+                           
+$$\color{lightpink}<sub> Pour \space la \space bibliothèque \space du \space jeu \space : \space voir \space requirements$$
