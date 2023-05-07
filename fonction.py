@@ -180,4 +180,4 @@ def jeuDuCoup(i = 0, state = {"a":"b"}):
         posFinal = posFinal + 1
     
     #################### apres sa il s'agit que de l'envoie de la reponse oslm
-    return tile , porte , posFinals
+    return tile , porte , posFinal
