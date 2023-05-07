@@ -107,15 +107,63 @@ def typeTile(tile = {"a":"b"}):
 
 #def trouverDesChemin
 
-#def recreerLaMap
+#retourne la porte ou il y a un pion si elle est au bord sinon retourne "M"
+def pionAUnePorte(positionPion = 0):
+    retour = "M"
+    tableAnalyse = [[1,"A","I"],[3,"B","H"],[5,"C","G"],[13,"D","L"],[27,"E","K"],[41,"F","J"],[47,"G","C"],[45,"H","B"],[43,"I","A"],[35,"J","F"],[21,"K","E"],[7,"L","D"]]
+    for i in tableAnalyse:
+        if i[0] == positionPion:
+            retour = (i[1],i[2])
+            break
+    return retour
+
+#cette fonction recreer la map sachant que on pousse tt une ligne a travers un couloir et que si un pion se trouve sur un bout 
+# de labyrinthe et qu il se retrouve ejecter, alors le joueur réaparait sur la tuile qui vient d 'etre placé 
+def recreerLaMap(board = [{"a":"b"}], tile = {"a":"b"}, porte = "A", positionPion = -1):
+    carte = board
+    tableAnalyse = {"A": [[43,36,29,22,15,8,1],"I"], 
+                    "B": [[45,38,31,24,17,10,3],"H"], 
+                    "C": [[47,40,33,26,19,12,5],"G"], 
+                    "D": [[7,8,9,10,11,12,13],"L"], 
+                    "E": [[21,22,23,24,25,26,27],"K"], 
+                    "F": [[35,36,37,38,39,40,41],"J"], 
+                    "G": [[5,12,19,26,33,40,47],"C"], 
+                    "H": [[3,10,17,24,31,38,45],"B"], 
+                    "I": [[1,8,15,22,29,36,43],"A"], 
+                    "J": [[41,40,39,38,37,36,35],"F"], 
+                    "K": [[27,26,25,24,23,22,21],"E"], 
+                    "L": [[13,12,11,10,9,8,7],"D"]}
+    table = tableAnalyse[porte]
+    i=0
+    enclume = True
+    while i<6:
+        carte[table[0][i]] = carte[table[0][i+1]]
+        if enclume and positionPion == table[0][i]:
+            pion = table[0][i]
+            enclume = False
+        i=i+1
+    carte[table[6]] = tile
+    pion = positionPion
+    if pionAUnePorte(positionPion) == table[1]:
+        pion = table[0][6]
+        return 0
+    
+    retour = (carte,pion)
+    return retour
+
+#def genererLesPortesAEssayer()
 
 #retourne l index de la tuile contenant le trésor
 def ouEstLeTresor(board = [{"a":"b"}], cible = 0):
     retour = 0
+    erreur = True
     for i in board:
         if cible == i["item"]:
+            erreur = False
             break
         retour = retour + 1
+    if erreur:
+        retour = -1
     return retour
 
 def jeuDuCoup(i = 0, state = {"a":"b"}):
@@ -132,4 +180,4 @@ def jeuDuCoup(i = 0, state = {"a":"b"}):
         posFinal = posFinal + 1
     
     #################### apres sa il s'agit que de l'envoie de la reponse oslm
-    return tile , porte , posFinal
+    return tile , porte , posFinals
