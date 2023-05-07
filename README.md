@@ -8,7 +8,7 @@
 
 ## $\color{red}> \space Règles \space du \space jeu \space < $
 
-- Chaque tour est composé de deux actions : insérer la tuile supplémentaire ; déplacer le pion
+- Chaque tour est composé de deux actions : insérer la tuile supplémentaire **ET** déplacer le pion
 - La tuile ne peut être insérer que là où il y a des flèches
 - La nouvelle tuile est passée au joueur suivant
 - Le pion doit se déplacer vers le trésor par le chemin le plus rapide
