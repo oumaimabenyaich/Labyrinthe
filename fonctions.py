@@ -146,8 +146,6 @@ def recreerLaMap(board = [{"a":"b"}], tile = {"a":"b"}, porte = "A", positionPio
     pion = positionPion
     if pionAUnePorte(positionPion) == table[1]:
         pion = table[0][6]
-        return 0
-    
     retour = (carte,pion)
     return retour
 
