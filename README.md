@@ -1,2 +1,1 @@
-# Maze Runner
-
+# * * Maze Runner * *
