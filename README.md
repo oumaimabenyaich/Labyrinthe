@@ -5,7 +5,6 @@
 *Vous disposez d'une tuile permettant de déplacer le plateau afin de trouver un chemin vers votre trésor. Chaque trésor a une position précise qui vous est fourni, les joueurs ont un nombre de trésor qui décroit à chaque fois qu'ils en attrapent un.*
 
 ![Ceci n'est pas une image](https://media.tenor.com/mrTbRUHldtYAAAAC/roger-pirates-red-poneglyph.gif)
-
 ## $\color{red}> \space Règles \space du \space jeu \space < $
 
 - Chaque tour est composé de deux actions : insérer la tuile supplémentaire ; déplacer le pion
