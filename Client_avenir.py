@@ -1,7 +1,7 @@
 import socket
 import json
-from fonction import moveAEnvoyer
-from fonction import jeuDuCoup
+from fonctions import moveAEnvoyer
+from fonctions import jeuDuCoup
 
 
 
