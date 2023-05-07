@@ -4,7 +4,7 @@
 
 *Vous disposez d'une tuile permettant de déplacer le plateau afin de trouver un chemin vers votre trésor. Chaque trésor a une position précise qui vous est fourni, les joueurs ont un nombre de trésor qui décroit à chaque fois qu'ils en attrapent un.*
 
-![Ceci n'est pas une image](https://media.tenor.com/mrTbRUHldtYAAAAC/roger-pirates-red-poneglyph.gif)
+![Ceci n'est pas une image](https://i.pinimg.com/originals/db/a9/7c/dba97cfce97ebfaf75770724b5b1e0dd.gif)
 
 ## $\color{red}> \space Règles \space du \space jeu \space < $
 
@@ -15,5 +15,4 @@
 - Il faut respecter les chemins 
 - Le joueur peut s'arrêter sur n'importe quelle case, il peut traverser une case où un pion est déjà présent et même s'arrêter dessus
 - Si un joueur sort du plateau, il réapparait de l'autre côté du plateau sur la même ligne
-
 
