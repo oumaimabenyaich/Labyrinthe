@@ -1,2 +1,2 @@
-# Labyrinthe
+# MAZE RUNNER
 BA2_Q2_IA
