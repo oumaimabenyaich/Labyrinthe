@@ -135,17 +135,20 @@ def recreerLaMap(board = [{"a":"b"}], tile = {"a":"b"}, porte = "A", positionPio
                     "L": [[13,12,11,10,9,8,7],"D"]}
     table = tableAnalyse[porte]
     i=0
-    enclume = True
+    pion = positionPion
     while i<6:
         carte[table[0][i]] = carte[table[0][i+1]]
-        if enclume and positionPion == table[0][i]:
-            pion = table[0][i]
-            enclume = False
         i=i+1
-    carte[table[6]] = tile
-    pion = positionPion
-    if pionAUnePorte(positionPion) == table[1]:
+    i = 1
+    if pionAUnePorte(positionPion) == (table[1],porte):
         pion = table[0][6]
+        i = 7
+    while i < 7:
+        if positionPion == table[0][i]:
+            pion = table[0][i-1]
+            break
+        i = i+1
+    carte[table[0][6]] = tile
     retour = (carte,pion)
     return retour
 
