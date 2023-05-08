@@ -7,55 +7,6 @@ def moveAEnvoyer(tile, gate, new_positions):
     print(retour)
     return retour
 
-def afficherEtat(jsonSS):
-    print("les joueurs sont : ", jsonSS["players"])
-    print("vous etes le joueur : ", jsonSS["current"] + 1)
-    print("votre positions est : " , jsonSS["positions"])
-    print("voici le tresor que vous devez attrapper : " , jsonSS["target"])
-    print("voici le nombre de tresors manquants" , jsonSS["remaining"])
-    print("voici la piece manquante : ")
-    if jsonSS["tile"]["N"]:
-        print("--        --")
-        print("|          |")
-    else:
-        print("------------")
-        print("|          |")
-    if jsonSS["tile"]["E"] and jsonSS["tile"]["W"]:
-        print("            ")
-        print("            ")
-        print("            ")
-        print("            ")
-        print("            ")
-        print("            ")
-    elif jsonSS["tile"]["E"] == False and jsonSS["tile"]["W"]:
-        print("           |")
-        print("           |")
-        print("           |")
-        print("           |")
-        print("           |")
-        print("           |")
-    elif jsonSS["tile"]["W"] == False and jsonSS["tile"]["E"]:
-        print("|           ")
-        print("|           ")
-        print("|           ")
-        print("|           ")
-        print("|           ")
-        print("|           ")
-    else: 
-        print("|          |")
-        print("|          |")
-        print("|          |")
-        print("|          |")
-        print("|          |")
-        print("|          |")
-    if jsonSS["tile"]["S"]:
-        print("|          |")
-        print("--        --")
-    else:
-        print("|          |")
-        print("------------")
-
-
  #le i sert comme indice pour tester notre code, a partir du 50eme coup, le code va commencer a generer des erreur
  #le state est l'etat du jeu qui sera un dictionnaire
  #la fonction retournera un tuple qui va ensuite etre utiliser par la fonction moveAEnvoyer
@@ -152,7 +103,6 @@ def recreerLaMap(board = [{"a":"b"}], tile = {"a":"b"}, porte = "A", positionPio
     retour = (carte,pion)
     return retour
 
-#def genererLesPortesAEssayer()
 
 #retourne l index de la tuile contenant le trésor
 def ouEstLeTresor(board = [{"a":"b"}], cible = 0):
@@ -166,6 +116,42 @@ def ouEstLeTresor(board = [{"a":"b"}], cible = 0):
     if erreur:
         retour = -1
     return retour
+
+#cette fonction genere une liste contenant les portes a essayer
+#quel porte il ne faut pas essayer?
+#tt simplement la porte qui sort la tuile contenant le trésor.
+def genererLesPortesAEssayer(positionTresor = 0):
+    porteABan = pionAUnePorte(positionTresor)
+    table = ["A","B","C","D","E","F","G","H","I","J","K","L"]
+    if porteABan == "M":
+        return table
+    retour = []
+    for i in table:
+        if i != porteABan[1]:
+            retour.append(i)
+    return retour
+
+
+#Cette fonction affiche le plateau de jeu, la tuile manquante ainsi que la position du pion
+#Cette fonction n'a pour but que de traquer les erreurs
+def afficherLePlateau(board = [{"a":"b"}], tile = {"a":"b"}, positionPion = -1):
+    ligneSupInf = "XXX XXX XXX XXX XXX XXX XXX"
+    indexSupInf = [1,5,9,13,17,21,25]
+    ligneMilieu = "X X X X X X X X X X X X X X"
+    indexMilieu = [[0,1,2],[4,5,6],[8,9,10],[12,13,14],[16,17,18],[20,21,22],[24,25,26]]
+    ligneSupDernier = "XXX XXX XXX XXX XXX XXX XXX XXX"
+    indexSupDernier = [1,5,9,13,17,21,25,29]
+    ligneMilieuDernier = "X X X X X X X X X X X X X X X X"
+    indexMilieu = [[0,1,2],[4,5,6],[8,9,10],[12,13,14],[16,17,18],[20,21,22],[24,25,26],[28,29,30]]
+    ligneInfDernier = "XXX XXX XXX XXX XXX XXX XXX XXX Le pion se trouve en :  "
+    indexInfDernier = [1,5,9,13,17,21,25,29,54]
+    indexNav = [0,1,2,3,4,5,6]
+
+    #Par ligne
+    for i in indexNav:
+        for o in indexNav:
+            print("a continuer")
+
 
 def jeuDuCoup(i = 0, state = {"a":"b"}):
     print(type(state))
