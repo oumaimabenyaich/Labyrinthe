@@ -135,22 +135,54 @@ def genererLesPortesAEssayer(positionTresor = 0):
 #Cette fonction affiche le plateau de jeu, la tuile manquante ainsi que la position du pion
 #Cette fonction n'a pour but que de traquer les erreurs
 def afficherLePlateau(board = [{"a":"b"}], tile = {"a":"b"}, positionPion = -1):
-    ligneSupInf = "XXX XXX XXX XXX XXX XXX XXX"
-    indexSupInf = [1,5,9,13,17,21,25]
-    ligneMilieu = "X X X X X X X X X X X X X X"
-    indexMilieu = [[0,1,2],[4,5,6],[8,9,10],[12,13,14],[16,17,18],[20,21,22],[24,25,26]]
-    ligneSupDernier = "XXX XXX XXX XXX XXX XXX XXX XXX"
-    indexSupDernier = [1,5,9,13,17,21,25,29]
-    ligneMilieuDernier = "X X X X X X X X X X X X X X X X"
-    indexMilieu = [[0,1,2],[4,5,6],[8,9,10],[12,13,14],[16,17,18],[20,21,22],[24,25,26],[28,29,30]]
-    ligneInfDernier = "XXX XXX XXX XXX XXX XXX XXX XXX Le pion se trouve en :  "
+#Le pion se trouve en :  "
     indexInfDernier = [1,5,9,13,17,21,25,29,54]
     indexNav = [0,1,2,3,4,5,6]
-
+    indexNavL = [0,1,2,3,4,5]
+    ligne = ""
     #Par ligne
-    for i in indexNav:
+    for i in indexNavL:
         for o in indexNav:
-            print("a continuer")
+            ligne  = ligne + "*"
+            if board[(i*7)+o]["N"] == True:
+                ligne = ligne + "  * "
+            else:
+                ligne = ligne + "--* "
+        print(ligne)
+        ligne = ""
+        for o in indexNav:
+            if board[(i*7)+o]["W"] == True:
+                ligne = ligne + " "
+            else:
+                ligne = ligne + "|"
+            if board[(i*7)+o]["item"] == None:
+                ligne = ligne + "  "
+            else:
+                if board[(i*7)+o]["item"] < 10:
+                    ligne = ligne + " "
+                    ligne = ligne + str(board[(i*7)+o]["item"])
+                else:
+                    ligne = ligne + str(board[(i*7)+o]["item"])
+            if board[(i*7)+o]["E"] == True:
+                ligne = ligne + "  "
+            else: 
+                ligne = ligne + "| "
+        print(ligne)
+        ligne = ""
+        for o in indexNav:
+            ligne  = ligne + "*"
+            if board[(i*7)+o]["S"] == True:
+                ligne = ligne + "  * "
+            else:
+                ligne = ligne + "--* "
+        print(ligne)
+        ligne  = ""
+    for o in indexNav:
+            ligne  = ligne + "*"
+            if board[(i*7)+o]["N"] == True:
+                ligne = ligne + "  * "
+            else:
+                ligne = ligne + "--* "
 
 
 def jeuDuCoup(i = 0, state = {"a":"b"}):
