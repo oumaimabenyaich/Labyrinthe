@@ -8,11 +8,10 @@ def test_moveAEnvoyer():
 
 
 # def jeuDuCoupTest():
-#     assert fonctions.jeuDuCoupTest(  ) == 
+#     assert fonctions.jeuDuCoupTest(i = 0, state = {"a":"b"}) == 
 
-
-# def typeTile():
-#     assert fonctions.typeTile(  ) == 
+def typeTile():
+    assert fonctions.typeTile(tileH) == 2
 
 
 # def pionAUnePorte():
