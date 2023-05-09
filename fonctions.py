@@ -56,7 +56,7 @@ def typeTile(tile = {"a":"b"}):
 
     return retour
 
-#def trouverDesChemin
+def trouverDesChemin
 
 #retourne la porte ou il y a un pion si elle est au bord sinon retourne "M"
 def pionAUnePorte(positionPion = 0):
@@ -136,7 +136,6 @@ def genererLesPortesAEssayer(positionTresor = 0):
 #Cette fonction n'a pour but que de traquer les erreurs
 def afficherLePlateau(board = [{"a":"b"}], tile = {"a":"b"}, positionPion = -1):
 #Le pion se trouve en :  "
-    indexInfDernier = [1,5,9,13,17,21,25,29,54]
     indexNav = [0,1,2,3,4,5,6]
     indexNavL = [0,1,2,3,4,5]
     ligne = ""
@@ -177,13 +176,69 @@ def afficherLePlateau(board = [{"a":"b"}], tile = {"a":"b"}, positionPion = -1):
                 ligne = ligne + "--* "
         print(ligne)
         ligne  = ""
+    
     for o in indexNav:
             ligne  = ligne + "*"
-            if board[(i*7)+o]["N"] == True:
+            if board[(42)+o]["N"] == True:
                 ligne = ligne + "  * "
             else:
                 ligne = ligne + "--* "
-
+    ligne  = ligne + "*"
+    if tile["N"] == True:
+        ligne = ligne + "  * "
+    else:
+        ligne = ligne + "--* "
+    print(ligne)
+    ligne = ""
+    for o in indexNav:
+        if board[(42)+o]["W"] == True:
+            ligne = ligne + " "
+        else:
+            ligne = ligne + "|"
+        if board[(42)+o]["item"] == None:
+            ligne = ligne + "  "
+        else:
+            if board[(42)+o]["item"] < 10:
+                ligne = ligne + " "
+                ligne = ligne + str(board[(42)+o]["item"])
+            else:
+                ligne = ligne + str(board[(42)+o]["item"])
+        if board[(42)+o]["E"] == True:
+            ligne = ligne + "  "
+        else: 
+            ligne = ligne + "| "
+    if tile["W"] == True:
+        ligne = ligne + " "
+    else:
+        ligne = ligne + "|"
+    if tile["item"] == None:
+        ligne = ligne + "  "
+    else:
+        if tile["item"] < 10:
+            ligne = ligne + " "
+            ligne = ligne + str(tile["item"])
+        else:
+            ligne = ligne + str(tile["item"])
+    if tile["E"] == True:
+        ligne = ligne + "  "
+    else: 
+        ligne = ligne + "| "
+    print(ligne)
+    ligne = ""
+    for o in indexNav:
+        ligne  = ligne + "*"
+        if board[(42)+o]["S"] == True:
+            ligne = ligne + "  * "
+        else:
+            ligne = ligne + "--* "
+    ligne  = ligne + "*"
+    if tile["S"] == True:
+        ligne = ligne + "  * "
+    else:
+        ligne = ligne + "--* "
+    ligne = ligne + " Le pion se trouve en : " + str(positionPion)
+    print(ligne)
+    
 
 def jeuDuCoup(i = 0, state = {"a":"b"}):
     print(type(state))
