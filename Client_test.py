@@ -4,7 +4,6 @@ from fonctions import moveAEnvoyer
 from fonctions import jeuDuCoupTest
 
 
-
 # on est le client IA
 s = socket.socket()
 address = ('localhost', 3000)  # port du prof
