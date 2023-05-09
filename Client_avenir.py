@@ -3,12 +3,9 @@ import json
 from fonctions import moveAEnvoyer
 from fonctions import jeuDuCoup
 
-
-
-
 # on est le client IA
 s = socket.socket()
-address = ('localhost', 3000)  # port du prof
+address = ('193.190.63.202', 3000)  # port du prof
 s.connect(address)
 request = {
     "request": "subscribe",
@@ -28,7 +25,6 @@ s.close()
 s = socket.socket()
 s.bind(('0.0.0.0', 5000))
 s.listen()
-
 
 
 o = -1
