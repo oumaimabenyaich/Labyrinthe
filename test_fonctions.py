@@ -54,10 +54,12 @@ board1 = [{"N": False, "E": True, "S": True, "W": False, "item": None}, #0
          {'N': True, 'E': True, 'S': False, 'W': True, 'item': 11}, #46
          {'N': False, 'E': True, 'S': True, 'W': False, 'item': 16},   #47 ######################
          {'N': True, 'E': False, 'S': False, 'W': True, 'item': None}] #48
-
-def ouEstLeTresor():
+def test_ouEstLeTresor():
     assert fonctions.ouEstLeTresor(board = board1 , cible = 1) == 4
 
+
+#def recreerLaMap():
+#   assert fonctions.recreerLaMap(board = board1, tile = tileH, porte = "A", positionPion = -1 ) == 
 
 
 

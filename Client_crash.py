@@ -6,7 +6,7 @@ from fonctions import jeuDuCoupTest
 
 # on est le client IA
 s = socket.socket()
-address = ('localhost', 3000)  # port du prof
+address = ('178.51.159.100', 3000)  # port du prof
 s.connect(address)
 request = {
     "request": "subscribe",
