@@ -56,7 +56,32 @@ def typeTile(tile = {"a":"b"}):
 
     return retour
 
-def trouverDesChemin
+#cette fonction nous permettra de savoir si on peut encore avancer dans une ou plusieurs direction ou si on est dans un cul de sac
+#cette fonction retourne un tuple contenant la case actuel , le nombre de case possible et une liste contenant les tuiles ou on
+#peut avancer (ex: (42,1,[35]))   tuileA = {"N": False} , tuileN = {"N": False} , tuileE = {"N": False} , tuileS = {"N": False} , tuileW = {"N": False}
+def yAQuoiCommePossiblite(positionActuelle = 0 , parent = 0 , board = [{"a":"b"}] ):
+    retourPossibilite = []
+    retourNombre = 0
+    x = positionActuelle % 7
+    y = (positionActuelle - x) / 7
+
+    porte = [["N","S"],["E","W"],["S","N"],["W","E"]]
+    if y != 0:
+        if tuileN["S"] == tuileA["N"] == True:
+            retourNombre = retourNombre +1
+            a = positionActuelle - 7
+            
+    
+
+
+
+
+def trouverDesChemin(board = [{"a":"b"}], positionPion = -1, tresor = -1):
+    porte = [["N","S"],["E","W"],["S","N"],["W","E"]]
+    positionActuelle = 0
+    x = positionActuelle % 7
+    y = (positionActuelle - x) / 7
+    
 
 #retourne la porte ou il y a un pion si elle est au bord sinon retourne "M"
 def pionAUnePorte(positionPion = 0):
