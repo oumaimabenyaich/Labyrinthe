@@ -7,9 +7,9 @@ def moveAEnvoyer(tile, gate, new_positions):
     print(retour)
     return retour
 
- #le i sert comme indice pour tester notre code, a partir du 50eme coup, le code va commencer a generer des erreur
- #le state est l'etat du jeu qui sera un dictionnaire
- #la fonction retournera un tuple qui va ensuite etre utiliser par la fonction moveAEnvoyer
+ #Le i sert d'indice pour tester notre code, à partir du 50eme coup, le code commence à générer des erreurs
+ #Le state est l'etat du jeu qui sera un dictionnaire {"players": ["LUR", "HSL"],"current": 0,"positions": [6, 47],"target": 3,"remaining": [4, 4],"tile": <the free tile>,"board": <list of 49 tiles>}
+ #La fonction retournera un tuple qui sera ensuite utilisé par la fonction moveAEnvoyer 
 def jeuDuCoupTest(i = 0, state = {"a":"b"}):
     print(type(state))
     ################ ici il y aura le code de "l'ia"
@@ -26,13 +26,15 @@ def jeuDuCoupTest(i = 0, state = {"a":"b"}):
     #################### apres sa il s'agit que de l'envoie de la reponse oslm
     return tile , porte , posFinal
 
-#cette fonction va nous retourner un nombre qui va nous servir a comparer et manipuler les tiles entre eux
-#un tile ressemble a sa : tile = { "N": true, "E": false, "S": true, "W": true, "item": 1}
+
+#Cette fonction va retourner un nombre qui va nous servir à comparer et manipuler les tiles entre eux
+#un tile = { "N": true, "E": false, "S": true, "W": true, "item": 1}
 def typeTile(tile = {"a":"b"}):
-    retour = 0 # un retour = 0 signifiera qu on a une erreur
-    #un retour = 1 signifiera qu on a un tile en forme de coude
-    #un retour = 2 signifiera qu on a un tile en forme de tube
-    #un retour = 3 signifiera qu on a un tile en forme de "T"
+    retour = 0 
+    #Retour = 0 signifie qu'on a une erreur
+    #Retour = 1 signifie qu'on a un tile en forme de coude
+    #Retour = 2 signifie qu'on a un tile en forme de tube
+    #Retour = 3 signifie qu'on a un tile en forme de "T"
     if tile['N'] == False and tile['E'] == True and tile['S'] == False and tile['W'] == True:
         retour = 2
     elif tile['N'] == True and tile['E'] == False and tile['S'] == True and tile['W'] == False:
@@ -59,7 +61,7 @@ def typeTile(tile = {"a":"b"}):
 def trouverDesChemin():
     print("kj")
 
-#retourne la porte ou il y a un pion si elle est au bord sinon retourne "M"
+#Retourne la porte où il y a un pion si elle est au bord sinon retourne "M"
 def pionAUnePorte(positionPion = 0):
     retour = "M"
     tableAnalyse = [[1,"A","I"],[3,"B","H"],[5,"C","G"],[13,"D","L"],[27,"E","K"],[41,"F","J"],[47,"G","C"],[45,"H","B"],[43,"I","A"],[35,"J","F"],[21,"K","E"],[7,"L","D"]]
@@ -69,8 +71,7 @@ def pionAUnePorte(positionPion = 0):
             break
     return retour
 
-#cette fonction recreer la map sachant que on pousse tt une ligne a travers un couloir et que si un pion se trouve sur un bout 
-# de labyrinthe et qu il se retrouve ejecter, alors le joueur réaparait sur la tuile qui vient d 'etre placé 
+#Sachant qu'on pousse toute une ligne à travers un couloir et que si un pion se trouve sur un bout de labyrinthe et qu'il se retrouve éjecter, alors le joueur réapparait sur la tuile qui vient d'être placée 
 def recreerLaMap(board = [{"a":"b"}], tile = {"a":"b"}, porte = "A", positionPion = -1):
     carte = board
     tableAnalyse = {"A": [[43,36,29,22,15,8,1],"I"], 
@@ -105,7 +106,7 @@ def recreerLaMap(board = [{"a":"b"}], tile = {"a":"b"}, porte = "A", positionPio
     return retour
 
 
-#retourne l index de la tuile contenant le trésor
+#retourne l'index de la tuile contenant le trésor
 def ouEstLeTresor(board = [{"a":"b"}], cible = 0):
     retour = 0
     erreur = True
@@ -118,9 +119,7 @@ def ouEstLeTresor(board = [{"a":"b"}], cible = 0):
         retour = -1
     return retour
 
-#cette fonction genere une liste contenant les portes a essayer
-#quel porte il ne faut pas essayer?
-#tt simplement la porte qui sort la tuile contenant le trésor.
+#Cette fonction génère une liste contenant les portes à essayer. La porte à ne pas essayer ? La porte qui sort la tuile contenant le trésor
 def genererLesPortesAEssayer(positionTresor = 0):
     porteABan = pionAUnePorte(positionTresor)
     table = ["A","B","C","D","E","F","G","H","I","J","K","L"]
