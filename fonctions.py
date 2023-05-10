@@ -56,7 +56,8 @@ def typeTile(tile = {"a":"b"}):
 
     return retour
 
-def trouverDesChemin
+def trouverDesChemin():
+    print("kj")
 
 #retourne la porte ou il y a un pion si elle est au bord sinon retourne "M"
 def pionAUnePorte(positionPion = 0):

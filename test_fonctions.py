@@ -1,10 +1,6 @@
 import pytest
 import fonctions
 
-tileH = {"N": False, "E": True, "S": True, "W": False, "item": None}
-def test_moveAEnvoyer():
-    assert fonctions.moveAEnvoyer(tileH,'A',3) == {"tile": tileH,"gate" : "A","new_position": 3}
-
 board1 = [{"N": False, "E": True, "S": True, "W": False, "item": None}, #0
          {"N": False, "E": True, "S": False, "W": True, "item": 0}, #1
          {"N": False, "E": True, "S": True, "W": True, "item": None}, #2
@@ -54,14 +50,45 @@ board1 = [{"N": False, "E": True, "S": True, "W": False, "item": None}, #0
          {'N': True, 'E': True, 'S': False, 'W': True, 'item': 11}, #46
          {'N': False, 'E': True, 'S': True, 'W': False, 'item': 16},   #47 ######################
          {'N': True, 'E': False, 'S': False, 'W': True, 'item': None}] #48
+
+tileH = {"N": False, "E": True, "S": True, "W": False, "item": None}
+
+state1 = {
+  "players": ["LUR", "HSL"],
+  "current": 0,
+  "positions": [6, 47],
+  "target": 3,
+  "remaining": [4, 4],
+  "tile": tileH,
+  "board": board1
+  }
+
+def test_moveAEnvoyer():
+    assert fonctions.moveAEnvoyer(tileH,'A',3) == {"tile": tileH,"gate" : "A","new_position": 3}
+
 def test_ouEstLeTresor():
     assert fonctions.ouEstLeTresor(board = board1 , cible = 1) == 4
 
+def test_pionAUnePorte():
+    assert fonctions.pionAUnePorte(positionPion = 1) == ("A","I")
+   
+def test_jeuDuCoupTest():
+    assert fonctions.jeuDuCoupTest(i =0, state = state1) == (tileH, 'A',6)
 
-#def recreerLaMap():
-#   assert fonctions.recreerLaMap(board = board1, tile = tileH, porte = "A", positionPion = -1 ) == 
+# def test_recreerLaMap():
+#     assert fonctions.recreerLaMap(board = board1, tile = tileH, porte = "A", positionPion = -1 ) == 
 
+# def test_trouverDesChemin():
+#     assert fonctions.trouverDesChemin() == 
 
+def test_typeTile():
+    assert fonctions.typeTile(tile = tileH) == 1
 
+def test_genererLesPortesAEssayer():
+    assert fonctions.genererLesPortesAEssayer(22) == ["A","B","C","D","E","F","G","H","I","J","K","L"]
 
+def test_afficherLePlateau():
+    assert fonctions.afficherLePlateau(board = board1, tile = tileH, positionPion = 3) == None
 
+def test_jeuDuCoup():
+    assert fonctions.jeuDuCoup(i = 0, state = state1) == (tileH,'A',6)
