@@ -1,3 +1,6 @@
 __pycache__
 .pytest_cache
 .vscode
+.coverage
+Client_crash.py
+

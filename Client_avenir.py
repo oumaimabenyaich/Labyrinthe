@@ -5,14 +5,15 @@ from fonctions import jeuDuCoup
 
 # on est le client IA
 s = socket.socket()
-address = ('172.17.10.41', 3000)  # port du prof
+address = ('193.190.63.202', 3000)  # port du prof
 s.connect(address)
 request = {
     "request": "subscribe",
-    "port": 5000,     # numero de port choisi par nous
-    "name": "Notre Jeu",
-    "matricules": ["19516", "19519"]
+    "port": 65534,     # numero de port choisi par nous
+    "name": "Road Poneglyphe",
+    "matricules": ["21237", "22375"]
 }
+
 # message qu'on envoie au serveur qui contient les données d'inscription
 message = json.dumps(request).encode()
 s.send(message)

@@ -3,3 +3,4 @@ imgui[glfw]
 jsonpickle
 Pillow
 pytest
+coverage
