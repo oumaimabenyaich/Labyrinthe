@@ -20,5 +20,12 @@
                            
 $$\color{lightpink}<sub> Pour \space la \space bibliothèque \space du \space jeu \space : \space voir \space requirements$$
 
+Le jeu fonctionne en commencant par generer les portes ou on peut jouer
+il s agit des portes qui n exclue pas la tuile contenant le tresor
+ensuite il genere une map porte par porte afin de simuler le poussage de tuile(la tuile utiliser est une tuile ouverte sur les 4 coté)
+le jeu gener un chemin pour ttes les porte essayer
+on regarde quel chemin mene a la position la plus proche du tresor
+enfin on genere la tuile qui sera placer a la place de la tuile ouverte de partout
+
 
 pour lancer le jeu entree la commande "python Client_avenir.py"
