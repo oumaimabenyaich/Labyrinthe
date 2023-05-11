@@ -109,7 +109,7 @@ def pionAUnePorte(positionPion = 0):
 
 #Sachant qu'on pousse toute une ligne à travers un couloir et que si un pion se trouve sur un bout de labyrinthe et qu'il se retrouve éjecter, alors le joueur réapparait sur la tuile qui vient d'être placée 
 def recreerLaMap(board = [{"a":"b"}], tile = {"a":"b"}, porte = "A", positionPion = -1):
-    carte = board
+    carte = board.copy()
     tableAnalyse = {"A": [[43,36,29,22,15,8,1],"I"], 
                     "B": [[45,38,31,24,17,10,3],"H"], 
                     "C": [[47,40,33,26,19,12,5],"G"], 
