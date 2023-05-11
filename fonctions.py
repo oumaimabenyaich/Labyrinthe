@@ -89,23 +89,6 @@ def yAQuoiCommePossiblite(positionActuelle = 0 , parent = 0 , board = [{"a":"b"}
                 retourPossibilite.append(positionActuelle-1)
     return [positionActuelle , retourNombre , retourPossibilite ]
 
-#cette fonction permet de remonter le chemin parcouru jusqu a un carrefour
-#on lui envoie une queu contenant toute les case parcouru et le noeud ou l on souhaite reprendre son chemin
-def remonterAuNoeud(queu = [], noeud = 0):
-    retour = [0]
-    cheminAnePasEssayer = 0
-    i = 1
-    while i <= queu[0]:
-        if queu[i] == noeud:
-            retour[0] = retour[0] + 1
-            retour.append(queu[i])
-            cheminAnePasEssayer = queu[i+1]
-            break
-        else:
-            retour[0] = retour[0] + 1
-            retour.append(queu[i])
-        i = i + 1
-    return [retour,cheminAnePasEssayer]
         
 
 def trouverDesChemin(board = [{"a":"b"}], positionPion = -1, positionTresor = -1, typeTile = 0,porte = "A"):
@@ -390,8 +373,23 @@ def meuilleurMove(donneeAtrier = []):
                 meilleurM[1] = distance
     return meilleurM[0]
 
-def placerTile():
-    print("salut")
+def placerTile(donneeAtrier = [], typeTile = 0):
+    if typeTile != 3:
+        return donneeAtrier[2][0]
+    else:
+        tile = donneeAtrier[2][0]
+        if tile["N"] == False:
+            tile["N"] = True
+            return tile
+        if tile["S"] == False:
+            tile["S"] = True
+            return tile
+        if tile["E"] == False:
+            tile["E"] = True
+            return tile
+        if tile["W"] == False:
+            tile["W"] = True
+            return tile
 
 
 
@@ -412,13 +410,18 @@ def jeuDuCoup(i = 0, state = {"a":"b"}):
         positionTresor = ouEstLeTresor(new_board ,tresor)
         chemin = trouverDesChemin(new_board,posPion, positionTresor, typeT,porteI)
         donneeCruciale.append(chemin)
-        typeTile = trouverTypeTile(chemin[1], tile)
-        donneeCruciale.append(typeTile)
+        typeTil = trouverTypeTile(chemin[1], tile)
+        donneeCruciale.append(typeTil)
         donneeCruciale.append(positionTresor)
         stockage.append(donneeCruciale)
+    stockageJ = peutIlEtreJouer(stockage, typeT) 
+    if stockageJ != []:
+        stockageM = meuilleurMove(stockageJ)
+        stockageT = placerTile(stockageM, typeT)
+        
+    else:
+        tile = 
+        porte = 
+        posFinale = 
     
-
-
-
-    #################### apres sa il s'agit que de l'envoie de la reponse oslm
     return tile , porte , posFinal
