@@ -192,3 +192,5 @@ def test_placerTile2():
     assert fonctions.placerTile(["A",[12,[-1,-1,-1]],[{"N": False, "E": True, "S": True, "W": False, "item": None},1],25], 1) == {'N': False, 'E': True, 'S': True, 'W': False, 'item': None}
 
 
+def test_jeuDuCoup():
+    assert fonctions.jeuDuCoup(0,state1) == ({'N': False, 'E': True, 'S': True, 'W': False, 'item': None}, 'A', 13)
