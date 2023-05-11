@@ -118,13 +118,8 @@ def trouverDesChemin(board = [{"a":"b"}], positionPion = -1, positionTresor = -1
     else: 
         return [positionPion,typeUtile]
     
-    while tuilePossible[1] != 0:
-        tuilePossible = yAQuoiCommePossiblite(queu[queu[0]] , queu[queu[0]-1] , board)
-        i = 1
-        while i < queu[0]:
-            if queu[i] == tuilePossible[2][0]:
-                tuilePossible = 0
-                continue
+    while True:
+        tuilePossible = yAQuoiCommePossiblite(queu[queu[0]] , queu[queu[0]-1] , board)        
 
         if tuilePossible[1] != 0:
             if tuilePossible[1] == 1:
@@ -147,6 +142,11 @@ def trouverDesChemin(board = [{"a":"b"}], positionPion = -1, positionTresor = -1
                     passageTuile = False
             if queu[queu[0]] == positionTresor:
                 return [positionTresor,typeUtile]
+            i = 1
+            while i < queu[0]:
+                if queu[i] == queu[queu[0]]:
+                    return [queu[queu[0]],typeUtile]
+                i = i + 1
         else:
             return [queu[queu[0]],typeUtile]
     
