@@ -93,36 +93,72 @@ def yAQuoiCommePossiblite(positionActuelle = 0 , parent = 0 , board = [{"a":"b"}
 #on lui envoie une queu contenant toute les case parcouru et le noeud ou l on souhaite reprendre son chemin
 def remonterAuNoeud(queu = [], noeud = 0):
     retour = [0]
+    cheminAnePasEssayer = 0
     i = 1
     while i <= queu[0]:
         if queu[i] == noeud:
             retour[0] = retour[0] + 1
             retour.append(queu[i])
+            cheminAnePasEssayer = queu[i+1]
             break
         else:
             retour[0] = retour[0] + 1
             retour.append(queu[i])
         i = i + 1
-    return retour
+    return [retour,cheminAnePasEssayer]
         
 
-def trouverDesChemin(board = [{"a":"b"}], positionPion = -1, tresor = -1):
-    #[positionActuelle , retourNombre , retourPossibilite ]
-    noeud = [0] #a chaque fois qu on aura des carrefours de chemin un 'noeud' sera rajouter ici, l'element 0 correspond au nbre de noeud
+def trouverDesChemin(board = [{"a":"b"}], positionPion = -1, positionTresor = -1, typeTile = 0,porte = "A"):
+        #[positionActuelle , retourNombre , retourPossibilite ]
+    bibliPorte = {"A":1 ,"B":3 ,"C":5 ,"D":13 ,"E":27 ,"F":41 ,"G":47 ,"H":45 ,"I":43 ,"J":35 ,"K":21 ,"L":7}
+    retour = []
+    typeUtile = [-1,-1,-1]
+    passageTuile = False
     queu = [1,positionPion]
-    premierElement = yAQuoiCommePossiblite(queu[queu[0]] , queu[queu[0]] , board)
-    if premierElement[1] != 0:
-        if premierElement == 1:
+    tuilePossible = yAQuoiCommePossiblite(queu[queu[0]] , queu[queu[0]] , board)
+    if tuilePossible[1] != 0:
+        if tuilePossible[1] == 1:
             queu[0] = queu[0] + 1
-            queu.append(premierElement[2][0])
+            queu.append(tuilePossible[2][0])
+            if queu[queu[0]] == bibliPorte[porte]:
+                passageTuile = True
+                typeUtile = [positionPion, queu[queu[0]], -1]
         else:
-            print("echec")
-            #noeud = 
+            queu[0] = queu[0] + 1
+            queu.append(tuilePossible[2][0])
+            if queu[queu[0]] == bibliPorte[porte]:
+                passageTuile = True
+                typeUtile = [positionPion, queu[queu[0]], -1]
+        if queu[queu[0]] == positionTresor:
+            return [positionTresor,typeUtile]
     else: 
-        return positionPion
-    #positionActuelle = 0
-    #x = positionActuelle % 7
-    #y = (positionActuelle - x) / 7
+        return [positionPion,typeUtile]
+    
+    while True:
+        tuilePossible = yAQuoiCommePossiblite(queu[queu[0]] , queu[queu[0]-1] , board)
+        if tuilePossible[1] != 0:
+            if tuilePossible[1] == 1:
+                queu[0] = queu[0] + 1
+                queu.append(tuilePossible[2][0])
+                if queu[queu[0]] == bibliPorte[porte]:
+                    passageTuile = True
+                    typeUtile = [positionPion, queu[queu[0]], -1]
+                if passageTuile:
+                    typeUtile[2] = queu[queu[0]]
+                    passageTuile = False
+            else:
+                queu[0] = queu[0] + 1
+                queu.append(tuilePossible[2][0])
+                if queu[queu[0]] == bibliPorte[porte]:
+                    passageTuile = True
+                    typeUtile = [positionPion, queu[queu[0]], -1]
+                if passageTuile:
+                    typeUtile[2] = queu[queu[0]]
+                    passageTuile = False
+            if queu[queu[0]] == positionTresor:
+                return [positionTresor,typeUtile]
+        else:
+            return [queu[queu[0]],typeUtile]
     
 
 #Retourne la porte où il y a un pion si elle est au bord sinon retourne "M"
@@ -303,19 +339,40 @@ def afficherLePlateau(board = [{"a":"b"}], tile = {"a":"b"}, positionPion = -1):
     ligne = ligne + " Le pion se trouve en : " + str(positionPion)
     print(ligne)
     
+def trouverTypeTile(tableTile = [-1,-1,-1], tile = {"N": False}):
+    retourTile = {"N": False, "E": False, "S": False, "W": False, "item": None}
+    retourTile["item"] = tile["item"]
+    if ((tableTile[1] - tableTile[0]) == -1) or ((tableTile[1] - tableTile[2]) == -1):
+        retourTile["E"] = True
+    if ((tableTile[1] - tableTile[0]) == 1) or ((tableTile[1] - tableTile[2]) == 1):
+        retourTile["W"] = True
+    if ((tableTile[1] - tableTile[0]) == -7) or ((tableTile[1] - tableTile[2]) == -7):
+        retourTile["S"] = True
+    if ((tableTile[1] - tableTile[0]) == 7) or ((tableTile[1] - tableTile[2]) == 7):
+        retourTile["N"] = True
+    return [retourTile, typeTile(retourTile)]
+
+
 
 def jeuDuCoup(i = 0, state = {"a":"b"}):
     print(type(state))
-    ################ ici il y aura le code de "l'ia"
-    #afficherEtat(jsonS)
-    #print("votre piece ne sera pas orientable pace que vazy gros assahbe")
-    #porte = input("entree la porte ou vous voulez jouez(une lettre de A à L et en majuscule svp) : ")
-    #posFinal = int(input("entree la position ou vous voulez atterir avec votre pion : "))
     porte = "A"
-    posFinal = state["positions"][state["current"]]
+    posPionInitiale = state["positions"][state["current"]]
     tile = state["tile"]
-    if i > 50 : 
-        posFinal = posFinal + 1
-    
+    board = state["board"]
+    tresor = state["target"]
+    porteAessayer = genererLesPortesAEssayer(ouEstLeTresor(board ,tresor))
+    typeT = typeTile(tile)
+    stockage = []
+    for porteI in porteAessayer:
+        donneeCruciale = [porteI]
+        new_board , posPion = recreerLaMap(board, tile, porteI, posPionInitiale)
+        positionTresor = ouEstLeTresor(new_board ,tresor)
+        posFinale , outilTile= trouverDesChemin(new_board,posPion, positionTresor, typeT,porteI)
+        donneeCruciale.append(posFinale)
+        donneeCruciale.append(outilTile)
+
+
+
     #################### apres sa il s'agit que de l'envoie de la reponse oslm
     return tile , porte , posFinal
