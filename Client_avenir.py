@@ -5,7 +5,7 @@ from fonctions import jeuDuCoup
 
 # on est le client IA
 s = socket.socket()
-address = ('localhost', 3000)  # port du prof
+address = ('172.17.10.59', 3000)  # port du prof
 s.connect(address)
 request = {
     "request": "subscribe",
@@ -17,7 +17,7 @@ request = {
 # message qu'on envoie au serveur qui contient les données d'inscription
 message = json.dumps(request).encode()
 s.send(message)
-reponse = s.recv(2048).decode()  # on ecoute la reponse du serveur
+reponse = s.recv(2048).decode()  # on ecoute la reponse du serveur 
 print("reponse:", reponse)
 s.close()
 
