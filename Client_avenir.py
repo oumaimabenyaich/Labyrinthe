@@ -5,7 +5,7 @@ from fonctions import jeuDuCoup
 
 # on est le client IA
 s = socket.socket()
-address = ('193.190.63.202', 3000)  # port du prof
+address = ('localhost', 3000)  # port du prof
 s.connect(address)
 request = {
     "request": "subscribe",
@@ -24,7 +24,7 @@ s.close()
 # les roles s'inversent, on devient le serveur jeu
 
 s = socket.socket()
-s.bind(('0.0.0.0', 5000))
+s.bind(('0.0.0.0', 65534))
 s.listen()
 
 
