@@ -418,10 +418,12 @@ def jeuDuCoup(i = 0, state = {"a":"b"}):
     if stockageJ != []:
         stockageM = meuilleurMove(stockageJ)
         stockageT = placerTile(stockageM, typeT)
-        
+        tile = stockageT
+        porte = stockageM[0]
+        posFinale = stockageM[1][0]
     else:
-        tile = 
-        porte = 
-        posFinale = 
-    
-    return tile , porte , posFinal
+        porte = "A"
+        bordError, posError = recreerLaMap(board, tile, porte, posPionInitiale)
+        data = yAQuoiCommePossiblite(posError, posError, bordError )
+        posFinale = data[1][0]
+    return tile , porte , posFinale
