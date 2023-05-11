@@ -352,6 +352,33 @@ def trouverTypeTile(tableTile = [-1,-1,-1], tile = {"N": False}):
         retourTile["N"] = True
     return [retourTile, typeTile(retourTile)]
 
+#Retour = 0 signifie qu'on a une erreur
+#Retour = 1 signifie qu'on a un tile en forme de coude
+#Retour = 2 signifie qu'on a un tile en forme de tube
+#Retour = 3 signifie qu'on a un tile en forme de "T"
+
+#porteI porte qu on essaye
+#typeTile [tile approximatif, type tile]
+#chemin  [positionfinalePion, informationUtilePourTrouverLatileAPlacer [-1,-1,-1] ]
+#donneeCruciale = [porteI, chemin, typeTile]
+
+def peutIlEtreJouer(donneeAtrier = [], typeTile = 0):
+    if typeTile == 3:
+        return donneeAtrier
+    retour = []
+    for i in donneeAtrier:
+        if i[2][1] == typeTile:
+            retour.append(i)
+    return retour
+    
+
+def meuilleurMove():
+    print("salut")
+
+def placerTile():
+    print("salut")
+
+
 
 
 def jeuDuCoup(i = 0, state = {"a":"b"}):
@@ -368,9 +395,12 @@ def jeuDuCoup(i = 0, state = {"a":"b"}):
         donneeCruciale = [porteI]
         new_board , posPion = recreerLaMap(board, tile, porteI, posPionInitiale)
         positionTresor = ouEstLeTresor(new_board ,tresor)
-        posFinale , outilTile= trouverDesChemin(new_board,posPion, positionTresor, typeT,porteI)
-        donneeCruciale.append(posFinale)
-        donneeCruciale.append(outilTile)
+        chemin = trouverDesChemin(new_board,posPion, positionTresor, typeT,porteI)
+        donneeCruciale.append(chemin)
+        typeTile = trouverTypeTile(chemin[1], tile)
+        donneeCruciale.append(typeTile)
+        stockage.append(donneeCruciale)
+    
 
 
 
