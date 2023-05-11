@@ -4,7 +4,7 @@
 
 *Vous disposez d'une tuile permettant de déplacer le plateau afin de trouver un chemin vers votre trésor. Chaque trésor a une position précise qui vous est fourni, les joueurs ont un nombre de trésor qui décroit à chaque fois qu'ils en attrapent un.*
 
-![Ceci n'est pas une image][(https://64.media.tumblr.com/d81bbceaa25de79b5308d42c24b967f3/tumblr_nidl3wAx3t1twwodoo3_r1_500.gifv)](https://i.pinimg.com/originals/aa/79/93/aa79938715bb9b18efa3acaf800e2b07.gif)
+![Ceci n'est pas une image](https://media1.giphy.com/media/3jcgPn9fzfaXc1EHJC/giphy.gif)
 
 ## $\color{lightgreen}> \space Stratégies \space du \space jeu \space < $
 
