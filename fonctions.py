@@ -360,7 +360,8 @@ def trouverTypeTile(tableTile = [-1,-1,-1], tile = {"N": False}):
 #porteI porte qu on essaye
 #typeTile [tile approximatif, type tile]
 #chemin  [positionfinalePion, informationUtilePourTrouverLatileAPlacer [-1,-1,-1] ]
-#donneeCruciale = [porteI, chemin, typeTile]
+#positionTresor  la position du tresor
+#donneeCruciale = [porteI, chemin, typeTile, positionTresor]
 
 def peutIlEtreJouer(donneeAtrier = [], typeTile = 0):
     if typeTile == 3:
@@ -372,8 +373,22 @@ def peutIlEtreJouer(donneeAtrier = [], typeTile = 0):
     return retour
     
 
-def meuilleurMove():
-    print("salut")
+def meuilleurMove(donneeAtrier = []):
+    meilleurM = [donneeAtrier[0],1000]
+    distance = 0.0
+    for i in donneeAtrier:
+        if i[1][0] == i[3]:
+            return i
+        else:
+            xt = i[1][0] % 7
+            yt = (i[1][0] - xt) /7
+            xf = i[3] % 7
+            yf = (i[3] - xt) /7
+            distance = ((xt-xf)*(xt-xf)) + ((yt-yf)*(yt-yf))
+            if distance < meilleurM[1]:
+                meilleurM[0] = i
+                meilleurM[1] = distance
+    return meilleurM[0]
 
 def placerTile():
     print("salut")
@@ -393,12 +408,13 @@ def jeuDuCoup(i = 0, state = {"a":"b"}):
     stockage = []
     for porteI in porteAessayer:
         donneeCruciale = [porteI]
-        new_board , posPion = recreerLaMap(board, tile, porteI, posPionInitiale)
+        new_board , posPion = recreerLaMap(board, {"N": True, "E": True, "S": True, "W": True, "item": None}, porteI, posPionInitiale)
         positionTresor = ouEstLeTresor(new_board ,tresor)
         chemin = trouverDesChemin(new_board,posPion, positionTresor, typeT,porteI)
         donneeCruciale.append(chemin)
         typeTile = trouverTypeTile(chemin[1], tile)
         donneeCruciale.append(typeTile)
+        donneeCruciale.append(positionTresor)
         stockage.append(donneeCruciale)
     
 
