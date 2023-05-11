@@ -144,3 +144,22 @@ def test_yAQuoiCommePossiblite():
 
 def test_trouverDesChemin():
     assert fonctions.trouverDesChemin(board = board1,positionPion = 0, positionTresor = 16,typeTile = 0, porte = 'A') == [16, [0, 1, 2]]
+
+def test_pionAUnePorte():
+    assert fonctions.pionAUnePorte(positionPion=1) == ('A','I')
+
+
+def test_recreerLaMap():
+    assert fonctions.recreerLaMap(board = board1, tile = tile1, porte = "A", positionPion = 43 ) ==(boardR,1)
+
+def test_ouEstLeTresor():
+    assert fonctions.ouEstLeTresor(board = board1 , cible = 1) == 4
+
+def test_genererLesPortesAEssayer():
+    assert fonctions.genererLesPortesAEssayer(22) == ["A","B","C","D","E","F","G","H","I","J","K","L"]
+
+def test_afficherLePlateau():
+    assert fonctions.afficherLePlateau(board = board1, tile = tile1, positionPion = 3) == None
+
+def test_trouverTypeTile():
+    assert fonctions.trouverTypeTile([0, 1, 2], {"N": False, "E": True, "S": True, "W": False, "item": 80}) == [{'N': False, 'E': True, 'S': False, 'W': True, 'item': 80}, 2]
