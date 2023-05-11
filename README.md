@@ -9,7 +9,7 @@
 ## $\color{lightgreen}> \space Stratégies \space du \space jeu \space < $
 
 - Le jeu fonctionne en commencant par générer les portes où l'on peut jouer, il s'agit des portes qui n'exclue pas la tuile contenant le trésor.
-- Ensuite, il génère une map porte par porte afin de simuler le poussage de tuile. (La tuile utilisée est une tuile ouverte sur les quatres côtés.)
+- Ensuite, il génère une map,porte par porte, afin de simuler le poussage de tuile. (La tuile utilisée est une tuile ouverte sur les quatres côtés.)
 - Le jeu génère un chemin pour toutes les portes essayées.
 - On regarde quel chemin mène à la position la plus proche du trésor.
 - Enfin, on génère la tuile qui sera placée à la place de la tuile ouverte de partout. 
