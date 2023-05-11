@@ -156,6 +156,9 @@ def test_typeTile11():
 
 def test_yAQuoiCommePossiblite():
     assert fonctions.yAQuoiCommePossiblite(positionActuelle = 2,parent = 1,board = board1) == [2,1,[9]]
+def test_yAQuoiCommePossiblite2():
+    assert fonctions.yAQuoiCommePossiblite(positionActuelle = 9,parent = 2,board = board1) == [9,1,[16]]
+
 
 def test_trouverDesChemin():
     assert fonctions.trouverDesChemin(board = board1,positionPion = 0, positionTresor = 16,typeTile = 0, porte = 'A') == [16, [0, 1, 2]]
@@ -184,6 +187,8 @@ def test_meilleurMove():
 
 def test_placerTile():
     assert fonctions.placerTile(["A",[12,[-1,-1,-1]],[{"N": False, "E": True, "S": True, "W": False, "item": None},1],25], 3) == {'N': True, 'E': True, 'S': True, 'W': False, 'item': None}
+
+def test_placerTile2():
     assert fonctions.placerTile(["A",[12,[-1,-1,-1]],[{"N": False, "E": True, "S": True, "W": False, "item": None},1],25], 1) == {'N': False, 'E': True, 'S': True, 'W': False, 'item': None}
 
 
