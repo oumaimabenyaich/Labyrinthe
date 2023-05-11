@@ -87,14 +87,42 @@ def yAQuoiCommePossiblite(positionActuelle = 0 , parent = 0 , board = [{"a":"b"}
             if (positionActuelle -1) != parent:
                 retourNombre = retourNombre +1
                 retourPossibilite.append(positionActuelle-1)
-    return (positionActuelle , retourNombre , retourPossibilite )
+    return [positionActuelle , retourNombre , retourPossibilite ]
 
+#cette fonction permet de remonter le chemin parcouru jusqu a un carrefour
+#on lui envoie une queu contenant toute les case parcouru et le noeud ou l on souhaite reprendre son chemin
+def remonterAuNoeud(queu = [], noeud = 0):
+    retour = [0]
+    i = 1
+    while i <= queu[0]:
+        if queu[i] == noeud:
+            retour[0] = retour[0] + 1
+            retour.append(queu[i])
+            break
+        else:
+            retour[0] = retour[0] + 1
+            retour.append(queu[i])
+        i = i + 1
+    return retour
+        
 
 def trouverDesChemin(board = [{"a":"b"}], positionPion = -1, tresor = -1):
-    porte = [["N","S"],["E","W"],["S","N"],["W","E"]]
-    positionActuelle = 0
-    x = positionActuelle % 7
-    y = (positionActuelle - x) / 7
+    #[positionActuelle , retourNombre , retourPossibilite ]
+    noeud = [0] #a chaque fois qu on aura des carrefours de chemin un 'noeud' sera rajouter ici, l'element 0 correspond au nbre de noeud
+    queu = [1,positionPion]
+    premierElement = yAQuoiCommePossiblite(queu[queu[0]] , queu[queu[0]] , board)
+    if premierElement[1] != 0:
+        if premierElement == 1:
+            queu[0] = queu[0] + 1
+            queu.append(premierElement[2][0])
+        else:
+            print("echec")
+            #noeud = 
+    else: 
+        return positionPion
+    #positionActuelle = 0
+    #x = positionActuelle % 7
+    #y = (positionActuelle - x) / 7
     
 
 #Retourne la porte où il y a un pion si elle est au bord sinon retourne "M"
