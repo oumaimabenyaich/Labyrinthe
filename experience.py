@@ -257,4 +257,4 @@ print(' ')
 boardR, newPion = recreerLaMap(board, tileH, "A", pos)
 afficherLePlateau(boardR, tileH, newPion)
 tresor = 10
-print(boardR) 
+print(boardR)
