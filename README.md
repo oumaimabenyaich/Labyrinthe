@@ -19,3 +19,6 @@
 - Si un joueur sort du plateau, il réapparait de l'autre côté du plateau sur la même ligne
                            
 $$\color{lightpink}<sub> Pour \space la \space bibliothèque \space du \space jeu \space : \space voir \space requirements$$
+
+
+pour lancer le jeu entree la commande "python Client_avenir.py"
