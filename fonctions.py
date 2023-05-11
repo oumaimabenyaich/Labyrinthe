@@ -66,6 +66,7 @@ def yAQuoiCommePossiblite(positionActuelle = 0 , parent = 0 , board = [{"a":"b"}
     retourNombre = 0
     x = positionActuelle % 7
     y = (positionActuelle - x) / 7
+    print(y)
 
     if y != 0:
         if board[positionActuelle-7]["S"] == board[positionActuelle]["N"] == True:
@@ -117,8 +118,14 @@ def trouverDesChemin(board = [{"a":"b"}], positionPion = -1, positionTresor = -1
     else: 
         return [positionPion,typeUtile]
     
-    while True:
+    while tuilePossible[1] != 0:
         tuilePossible = yAQuoiCommePossiblite(queu[queu[0]] , queu[queu[0]-1] , board)
+        i = 1
+        while i < queu[0]:
+            if queu[i] == tuilePossible[2][0]:
+                tuilePossible = 0
+                continue
+
         if tuilePossible[1] != 0:
             if tuilePossible[1] == 1:
                 queu[0] = queu[0] + 1
