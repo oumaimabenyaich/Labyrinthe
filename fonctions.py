@@ -67,15 +67,27 @@ def yAQuoiCommePossiblite(positionActuelle = 0 , parent = 0 , board = [{"a":"b"}
     x = positionActuelle % 7
     y = (positionActuelle - x) / 7
 
-    porte = [["N","S"],["E","W"],["S","N"],["W","E"]]
     if y != 0:
-        if tuileN["S"] == tuileA["N"] == True:
-            retourNombre = retourNombre +1
-            a = positionActuelle - 7
-            
-    
-
-
+        if board[positionActuelle-7]["S"] == board[positionActuelle]["N"] == True:
+            if (positionActuelle - 7) != parent:
+                retourNombre = retourNombre +1
+                retourPossibilite.append(positionActuelle - 7)
+    if x != 6:
+        if board[positionActuelle+1]["W"] == board[positionActuelle]["E"] == True:
+            if (positionActuelle +1) != parent:
+                retourNombre = retourNombre +1
+                retourPossibilite.append(positionActuelle+1)
+    if y != 6:
+        if board[positionActuelle+7]["N"] == board[positionActuelle]["S"] == True:
+            if (positionActuelle +7) != parent:
+                retourNombre = retourNombre +1
+                retourPossibilite.append(positionActuelle+7)
+    if x != 0:
+        if board[positionActuelle-1]["E"] == board[positionActuelle]["W"] == True:
+            if (positionActuelle -1) != parent:
+                retourNombre = retourNombre +1
+                retourPossibilite.append(positionActuelle-1)
+    return (positionActuelle , retourNombre , retourPossibilite )
 
 
 def trouverDesChemin(board = [{"a":"b"}], positionPion = -1, tresor = -1):
