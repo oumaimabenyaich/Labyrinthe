@@ -105,6 +105,13 @@ tile1 = {"N": False, "E": True, "S": True, "W": False, "item": None}
 tile2 = {"N": True, "E": False, "S": True, "W": False, "item": None}
 tile3 = {"N": True, "E": True, "S": False, "W": True, "item": None}
 tile4 = {"N": False, "E": False, "S": False, "W": True, "item": None}
+tile5 = {"N": False, "E": False, "S": True, "W": True, "item": None}
+tile6 = {"N": True, "E": False, "S": False, "W": True, "item": None}
+tile7 ={"N": True, "E": True, "S": False, "W": False, "item": None}
+tile8 = {"N": True, "E": True, "S": False, "W": False, "item": None}
+tile9 = {"N": True, "E": False, "S": True, "W": True, "item": None}
+tile10 = {"N": False, "E": True, "S": True, "W": True, "item": None}
+tile11 = {"N": True, "E": True, "S": True, "W": False, "item": None}
 
 state1 = {
   "players": ["LUR", "HSL"],
@@ -115,32 +122,75 @@ state1 = {
   "tile": tile1,
   "board": board1
   }
-state2 = {
-  "players": ["LUR", "HSL"],
-  "current": 0,
-  "positions": [40, 47],
-  "target": 3,
-  "remaining": [4, 4],
-  "tile": tile1,
-  "board": board1
-  }
-
 
 def test_moveAEnvoyer():
     assert fonctions.moveAEnvoyer(tile1,'A',1) == {"tile": tile1,"gate" : "A","new_position": 1}
 
 def test_jeuDuCoupTest():
     assert fonctions.jeuDuCoupTest(i =0, state = state1) == (tile1, 'A',6)
-    assert fonctions.jeuDuCoupTest(i =51, state = state2) == (tile1, 'A',41)
+def test_jeuDuCoupTest2():
+    assert fonctions.jeuDuCoupTest(i =51, state = state1) == (tile1, 'A',7)
 
-def test_typeTile():
+def test_typeTile1():
     assert fonctions.typeTile(tile = tile1) == 1
+def test_typeTile2():
     assert fonctions.typeTile(tile = tile2) == 2
-    assert fonctions.typeTile (tile = tile3) ==3
-    assert fonctions.typeTile (tile= tile4) == 0
+def test_typeTile3():
+    assert fonctions.typeTile(tile = tile3) ==3
+def test_typeTile4():
+    assert fonctions.typeTile(tile= tile4) == 0
+def test_typeTile5():
+    assert fonctions.typeTile(tile= tile5) == 1
+def test_typeTile6():
+    assert fonctions.typeTile(tile = tile6) == 1
+def test_typeTile7():
+    assert fonctions.typeTile(tile = tile7) == 1
+def test_typeTile8():
+    assert fonctions.typeTile(tile = tile8) ==1
+def test_typeTile9():
+    assert fonctions.typeTile(tile= tile9) == 3
+def test_typeTile10():
+    assert fonctions.typeTile(tile= tile10) == 3
+def test_typeTile11():
+    assert fonctions.typeTile(tile= tile11) == 3
 
 def test_yAQuoiCommePossiblite():
     assert fonctions.yAQuoiCommePossiblite(positionActuelle = 2,parent = 1,board = board1) == [2,1,[9]]
+def test_yAQuoiCommePossiblite2():
+    assert fonctions.yAQuoiCommePossiblite(positionActuelle = 9,parent = 2,board = board1) == [9,1,[16]]
+
 
 def test_trouverDesChemin():
     assert fonctions.trouverDesChemin(board = board1,positionPion = 0, positionTresor = 16,typeTile = 0, porte = 'A') == [16, [0, 1, 2]]
+
+def test_pionAUnePorte():
+    assert fonctions.pionAUnePorte(positionPion=1) == ('A','I')
+
+
+def test_recreerLaMap():
+    assert fonctions.recreerLaMap(board = board1, tile = tile1, porte = "A", positionPion = 43 ) ==(boardR,1)
+
+def test_ouEstLeTresor():
+    assert fonctions.ouEstLeTresor(board = board1 , cible = 1) == 4
+
+def test_genererLesPortesAEssayer():
+    assert fonctions.genererLesPortesAEssayer(22) == ["A","B","C","D","E","F","G","H","I","J","K","L"]
+
+def test_afficherLePlateau():
+    assert fonctions.afficherLePlateau(board = board1, tile = tile1, positionPion = 3) == None
+
+def test_trouverTypeTile():
+    assert fonctions.trouverTypeTile([0, 1, 2], {"N": False, "E": True, "S": True, "W": False, "item": 80}) == [{'N': False, 'E': True, 'S': False, 'W': True, 'item': 80}, 2]
+
+def test_meilleurMove():
+    assert fonctions.meuilleurMove([["A",[12,[-1,-1,-1]],[],25],["A",[24,[-1,-1,-1]],[],25],["A",[11,[-1,-1,-1]],[],25],["A",[3,[-1,-1,-1]],[],25]]) == ['A', [24, [-1, -1, -1]], [], 25]
+
+def test_placerTile():
+    assert fonctions.placerTile(["A",[12,[-1,-1,-1]],[{"N": False, "E": True, "S": True, "W": False, "item": None},1],25], 3) == {'N': True, 'E': True, 'S': True, 'W': False, 'item': None}
+
+def test_placerTile2():
+    assert fonctions.placerTile(["A",[12,[-1,-1,-1]],[{"N": False, "E": True, "S": True, "W": False, "item": None},1],25], 1) == {'N': False, 'E': True, 'S': True, 'W': False, 'item': None}
+
+
+def test_jeuDuCoup():
+    assert fonctions.jeuDuCoup(0,state1) == ({'N': False, 'E': True, 'S': True, 'W': False, 'item': None}, 'A', 13)
