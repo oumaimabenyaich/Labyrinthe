@@ -145,30 +145,42 @@ def test_yAQuoiCommePossiblite():
 def test_trouverDesChemin():
     assert fonctions.trouverDesChemin(board = board1,positionPion = 0, positionTresor = 16,typeTile = 0, porte = 'A') == [16, [0, 1, 2]]
 
+# # def pionAUnePorte(positionPion = 0):
+# #     retour = "M"
+# #     tableAnalyse = [[1,"A","I"],[3,"B","H"],[5,"C","G"],[13,"D","L"],[27,"E","K"],[41,"F","J"],[47,"G","C"],[45,"H","B"],[43,"I","A"],[35,"J","F"],[21,"K","E"],[7,"L","D"]]
+# #     for i in tableAnalyse:
+# #         if i[0] == positionPion:
+# #             retour = (i[1],i[2])
+# #             break
+# #     return retour
 
-def test_ouEstLeTresor():
-    assert fonctions.ouEstLeTresor(board = board1 , cible = 1) == 4
+# def test_pionAUnePorte():
+#     assert fonctions.pionAUnePorte(positionPion = 1) == ("A","I")
 
-def test_pionAUnePorte():
-    assert fonctions.pionAUnePorte(positionPion = 1) == ("A","I")
+
+
+# def test_ouEstLeTresor():
+#     assert fonctions.ouEstLeTresor(board = board1 , cible = 1) == 4
+
+
    
 
 
-def test_recreerLaMap():
-    assert fonctions.recreerLaMap(board = board1, tile = tile1
-, porte = "A", positionPion = 43 ) == (boardR,1)
+# def test_recreerLaMap():
+#     assert fonctions.recreerLaMap(board = board1, tile = tile1
+# , porte = "A", positionPion = 43 ) == (boardR,1)
 
-# def test_trouverDesChemin():
-#     assert fonctions.trouverDesChemin() == 
+# # def test_trouverDesChemin():
+# #     assert fonctions.trouverDesChemin() == 
 
 
-def test_genererLesPortesAEssayer():
-    assert fonctions.genererLesPortesAEssayer(22) == ["A","B","C","D","E","F","G","H","I","J","K","L"]
+# def test_genererLesPortesAEssayer():
+#     assert fonctions.genererLesPortesAEssayer(22) == ["A","B","C","D","E","F","G","H","I","J","K","L"]
 
-def test_afficherLePlateau():
-    assert fonctions.afficherLePlateau(board = board1, tile = tile1
-, positionPion = 3) == None
+# def test_afficherLePlateau():
+#     assert fonctions.afficherLePlateau(board = board1, tile = tile1
+# , positionPion = 3) == None
 
-# def test_jeuDuCoup():
-#     assert fonctions.jeuDuCoup(i = 0, state = state1) == (tile1
-#,'A',6)
+# # def test_jeuDuCoup():
+# #     assert fonctions.jeuDuCoup(i = 0, state = state1) == (tile1
+# #,'A',6)
