@@ -425,5 +425,8 @@ def jeuDuCoup(i = 0, state = {"a":"b"}):
         porte = "A"
         bordError, posError = recreerLaMap(board, tile, porte, posPionInitiale)
         data = yAQuoiCommePossiblite(posError, posError, bordError )
-        posFinale = data[2][0]
+        if data[1]!=0:
+            posFinale = data[2][0]
+        else:
+            posFinale = posError
     return tile , porte , posFinale
