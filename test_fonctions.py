@@ -50,13 +50,72 @@ board1 = [{"N": False, "E": True, "S": True, "W": False, "item": None}, #0
          {'N': True, 'E': True, 'S': False, 'W': True, 'item': 11}, #46
          {'N': False, 'E': True, 'S': True, 'W': False, 'item': 16},   #47 ######################
          {'N': True, 'E': False, 'S': False, 'W': True, 'item': None}] #48
-
+boardR = [{'N': False, 'E': True, 'S': True, 'W': False, 'item': None},
+          {'N': False, 'E': True, 'S': True, 'W': False, 'item': None},
+          {'N': False, 'E': True, 'S': True, 'W': True, 'item': None}, 
+          {'N': True, 'E': False, 'S': True, 'W': False, 'item': None}, 
+          {'N': False, 'E': True, 'S': True, 'W': True, 'item': 1}, 
+          {'N': False, 'E': False, 'S': True, 'W': True, 'item': 15}, 
+          {'N': False, 'E': False, 'S': True, 'W': True, 'item': None}, 
+          {'N': True, 'E': True, 'S': False, 'W': False, 'item': 12}, 
+          {'N': False, 'E': True, 'S': False, 'W': True, 'item': 0}, 
+          {'N': True, 'E': False, 'S': True, 'W': False, 'item': None}, 
+          {'N': False, 'E': True, 'S': False, 'W': True, 'item': None},
+          {'N': False, 'E': False, 'S': True, 'W': True, 'item': None},
+          {'N': True, 'E': False, 'S': False, 'W': True, 'item': None},
+          {'N': True, 'E': False, 'S': False, 'W': True, 'item': None},
+          {'N': True, 'E': True, 'S': True, 'W': False, 'item': 2},
+          {'N': True, 'E': False, 'S': True, 'W': True, 'item': 19}, 
+          {'N': True, 'E': True, 'S': True, 'W': False, 'item': 3},
+          {'N': True, 'E': True, 'S': True, 'W': False, 'item': 20},
+          {'N': False, 'E': True, 'S': True, 'W': True, 'item': 4},
+          {'N': True, 'E': True, 'S': True, 'W': False, 'item': 23},
+          {'N': True, 'E': False, 'S': True, 'W': True, 'item': 5},
+          {'N': False, 'E': True, 'S': True, 'W': False, 'item': None},
+          {'N': False, 'E': True, 'S': False, 'W': True, 'item': None},
+          {'N': True, 'E': False, 'S': True, 'W': False, 'item': None}, 
+          {'N': True, 'E': False, 'S': True, 'W': False, 'item': None}, 
+          {'N': False, 'E': True, 'S': True, 'W': False, 'item': 14}, 
+          {'N': True, 'E': True, 'S': False, 'W': False, 'item': None}, 
+          {'N': False, 'E': True, 'S': False, 'W': True, 'item': None}, 
+          {'N': True, 'E': True, 'S': True, 'W': False, 'item': 6}, 
+          {'N': True, 'E': False, 'S': True, 'W': False, 'item': None}, 
+          {'N': True, 'E': True, 'S': False, 'W': True, 'item': 7}, 
+          {'N': False, 'E': True, 'S': True, 'W': False, 'item': None}, 
+          {'N': True, 'E': False, 'S': True, 'W': True, 'item': 8}, 
+          {'N': True, 'E': True, 'S': False, 'W': False, 'item': None}, 
+          {'N': True, 'E': False, 'S': True, 'W': True, 'item': 9}, 
+          {'N': True, 'E': True, 'S': False, 'W': False, 'item': 13},
+          {'N': False, 'E': True, 'S': True, 'W': False, 'item': None}, 
+          {'N': True, 'E': True, 'S': False, 'W': True, 'item': 18}, 
+          {'N': True, 'E': False, 'S': False, 'W': True, 'item': 17}, 
+          {'N': False, 'E': True, 'S': True, 'W': True, 'item': 22}, 
+          {'N': False, 'E': True, 'S': True, 'W': False, 'item': None}, 
+          {'N': False, 'E': True, 'S': False, 'W': True, 'item': None}, 
+          {'N': True, 'E': True, 'S': False, 'W': False, 'item': None}, 
+          {'N': True, 'E': True, 'S': False, 'W': True, 'item': 21}, 
+          {'N': True, 'E': True, 'S': False, 'W': True, 'item': None},
+          {'N': True, 'E': True, 'S': False, 'W': False, 'item': None}, 
+          {'N': True, 'E': True, 'S': False, 'W': True, 'item': 11}, 
+          {'N': False, 'E': True, 'S': True, 'W': False, 'item': 16}, 
+          {'N': True, 'E': False, 'S': False, 'W': True, 'item': None}
+          ] 
+ 
 tileH = {"N": False, "E": True, "S": True, "W": False, "item": None}
 
 state1 = {
   "players": ["LUR", "HSL"],
   "current": 0,
   "positions": [6, 47],
+  "target": 3,
+  "remaining": [4, 4],
+  "tile": tileH,
+  "board": board1
+  }
+state2 = {
+  "players": ["LUR", "HSL"],
+  "current": 0,
+  "positions": [51, 47],
   "target": 3,
   "remaining": [4, 4],
   "tile": tileH,
@@ -74,12 +133,13 @@ def test_pionAUnePorte():
    
 def test_jeuDuCoupTest():
     assert fonctions.jeuDuCoupTest(i =0, state = state1) == (tileH, 'A',6)
+    # assert fonctions.jeuDuCoupTest(i =0, state = state2) == (tileH, 'A',51)
 
-# def test_recreerLaMap():
-#     assert fonctions.recreerLaMap(board = board1, tile = tileH, porte = "A", positionPion = -1 ) == 
+def test_recreerLaMap():
+    assert fonctions.recreerLaMap(board = board1, tile = tileH, porte = "A", positionPion = 43 ) == (boardR,1)
 
-# def test_trouverDesChemin():
-#     assert fonctions.trouverDesChemin() == 
+def test_trouverDesChemin():
+    assert fonctions.trouverDesChemin() == 
 
 def test_typeTile():
     assert fonctions.typeTile(tile = tileH) == 1
