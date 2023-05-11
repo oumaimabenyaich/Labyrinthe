@@ -105,6 +105,13 @@ tile1 = {"N": False, "E": True, "S": True, "W": False, "item": None}
 tile2 = {"N": True, "E": False, "S": True, "W": False, "item": None}
 tile3 = {"N": True, "E": True, "S": False, "W": True, "item": None}
 tile4 = {"N": False, "E": False, "S": False, "W": True, "item": None}
+tile5 = {"N": False, "E": False, "S": True, "W": True, "item": None}
+tile6 = {"N": True, "E": False, "S": False, "W": True, "item": None}
+tile7 ={"N": True, "E": True, "S": False, "W": False, "item": None}
+tile8 = {"N": True, "E": True, "S": False, "W": False, "item": None}
+tile9 = {"N": True, "E": False, "S": True, "W": True, "item": None}
+tile10 = {"N": False, "E": True, "S": True, "W": True, "item": None}
+tile11 = {"N": True, "E": True, "S": True, "W": False, "item": None}
 
 state1 = {
   "players": ["LUR", "HSL"],
@@ -121,13 +128,31 @@ def test_moveAEnvoyer():
 
 def test_jeuDuCoupTest():
     assert fonctions.jeuDuCoupTest(i =0, state = state1) == (tile1, 'A',6)
+def test_jeuDuCoupTest2():
     assert fonctions.jeuDuCoupTest(i =51, state = state1) == (tile1, 'A',7)
 
-def test_typeTile():
+def test_typeTile1():
     assert fonctions.typeTile(tile = tile1) == 1
+def test_typeTile2():
     assert fonctions.typeTile(tile = tile2) == 2
-    assert fonctions.typeTile (tile = tile3) ==3
-    assert fonctions.typeTile (tile= tile4) == 0
+def test_typeTile3():
+    assert fonctions.typeTile(tile = tile3) ==3
+def test_typeTile4():
+    assert fonctions.typeTile(tile= tile4) == 0
+def test_typeTile5():
+    assert fonctions.typeTile(tile= tile5) == 1
+def test_typeTile6():
+    assert fonctions.typeTile(tile = tile6) == 1
+def test_typeTile7():
+    assert fonctions.typeTile(tile = tile7) == 1
+def test_typeTile8():
+    assert fonctions.typeTile(tile = tile8) ==1
+def test_typeTile9():
+    assert fonctions.typeTile(tile= tile9) == 3
+def test_typeTile10():
+    assert fonctions.typeTile(tile= tile10) == 3
+def test_typeTile11():
+    assert fonctions.typeTile(tile= tile11) == 3
 
 def test_yAQuoiCommePossiblite():
     assert fonctions.yAQuoiCommePossiblite(positionActuelle = 2,parent = 1,board = board1) == [2,1,[9]]
