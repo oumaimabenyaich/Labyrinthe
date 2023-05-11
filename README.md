@@ -6,6 +6,15 @@
 
 ![Ceci n'est pas une image](https://64.media.tumblr.com/d81bbceaa25de79b5308d42c24b967f3/tumblr_nidl3wAx3t1twwodoo3_r1_500.gifv)
 
+## $\color{lightgreen}> \space Stratégies \space du \space jeu \space < $
+
+Le jeu fonctionne en commencant par générer les portes où l'on peut jouer, il s'agit des portes qui n'exclue pas la tuile contenant le trésor.
+Ensuite, il génère une map porte par porte afin de simuler le poussage de tuile. (La tuile utilisée est une tuile ouverte sur les quatres côtés.)
+Le jeu génère un chemin pour toutes les portes essayées.
+On regarde quel chemin mène à la position la plus proche du trésor.
+Enfin, on génère la tuile qui sera placée à la place de la tuile ouverte de partout. 
+Pour lancer le jeu, entrez la commande "python Client_avenir.py"
+
 ## $\color{red}> \space Règles \space du \space jeu \space < $
 
 - Chaque tour est composé de deux actions : 
@@ -20,12 +29,3 @@
                            
 $$\color{lightpink}<sub> Pour \space la \space bibliothèque \space du \space jeu \space : \space voir \space requirements$$
 
-Le jeu fonctionne en commencant par generer les portes ou on peut jouer
-il s agit des portes qui n exclue pas la tuile contenant le tresor
-ensuite il genere une map porte par porte afin de simuler le poussage de tuile(la tuile utiliser est une tuile ouverte sur les 4 coté)
-le jeu gener un chemin pour ttes les porte essayer
-on regarde quel chemin mene a la position la plus proche du tresor
-enfin on genere la tuile qui sera placer a la place de la tuile ouverte de partout
-
-
-pour lancer le jeu entree la commande "python Client_avenir.py"
